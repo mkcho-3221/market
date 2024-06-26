@@ -9,7 +9,6 @@ public enum ExceptionCode {
     PRODUCT_NOT_FOUND(404, "Product Not Found"),
     PRODUCT_NOT_AVAILABLE(404, "Product Not AVAILABLE"),
     ORDER_NOT_FOUND(404, "Order Not Found"),
-
     PERMISSION_DENIED(404, "Permission Denied");
     @Getter
     private int status;

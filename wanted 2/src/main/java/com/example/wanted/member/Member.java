@@ -20,8 +20,9 @@ public class Member {
     private Long memberId;
     @Column(nullable = false, updatable = false, unique = true)
     private String email;
-    @Column(nullable = false, updatable = false)
-    private String userName;
+    @Column(nullable = false, unique = true)
+    private String memberName;
+    @Column(nullable = false)
     private String password;
 
     @OneToMany(mappedBy = "seller")
