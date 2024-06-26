@@ -31,7 +31,7 @@ public class OrderResponseDtoTest {
         Member seller = new Member();
         seller.setMemberId(1L);
         seller.setEmail("123@seller.com");
-        seller.setUserName("Seller");
+        seller.setMemberName("Seller");
         seller.setPassword("sell123");
 
         memberService.createMember(seller);
@@ -39,7 +39,7 @@ public class OrderResponseDtoTest {
         Member buyer = new Member();
         buyer.setMemberId(2L);
         buyer.setEmail("123@buyer.com");
-        buyer.setUserName("Buyer");
+        buyer.setMemberName("Buyer");
         buyer.setPassword("buy123");
 
         memberService.createMember(buyer);
@@ -73,7 +73,7 @@ public class OrderResponseDtoTest {
         Member seller = new Member();
         seller.setMemberId(1L);
         seller.setEmail("123@seller.com");
-        seller.setUserName("Seller");
+        seller.setMemberName("Seller");
         seller.setPassword("sell123");
 
         memberService.createMember(seller);
@@ -81,7 +81,7 @@ public class OrderResponseDtoTest {
         Member buyer = new Member();
         buyer.setMemberId(2L);
         buyer.setEmail("123@buyer.com");
-        buyer.setUserName("Buyer");
+        buyer.setMemberName("Buyer");
         buyer.setPassword("buy123");
 
         memberService.createMember(buyer);
