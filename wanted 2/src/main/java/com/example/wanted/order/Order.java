@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long orderId;
+    private Long orderId;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus = OrderStatus.IN_PROGRESS;

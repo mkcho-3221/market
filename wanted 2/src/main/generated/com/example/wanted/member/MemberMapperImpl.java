@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-21T23:07:16+0900",
+    date = "2024-06-26T09:20:33+0900",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -20,7 +20,7 @@ public class MemberMapperImpl implements MemberMapper {
         Member member = new Member();
 
         member.setEmail( memberPostDto.getEmail() );
-        member.setUserName( memberPostDto.getUserName() );
+        member.setMemberName( memberPostDto.getMemberName() );
         member.setPassword( memberPostDto.getPassword() );
 
         return member;
@@ -35,7 +35,7 @@ public class MemberMapperImpl implements MemberMapper {
         Member member = new Member();
 
         member.setMemberId( memberPatchDto.getMemberId() );
-        member.setUserName( memberPatchDto.getUserName() );
+        member.setMemberName( memberPatchDto.getMemberName() );
         member.setPassword( memberPatchDto.getPassword() );
 
         return member;
@@ -49,17 +49,17 @@ public class MemberMapperImpl implements MemberMapper {
 
         long memberId = 0L;
         String email = null;
-        String userName = null;
         String password = null;
 
         if ( member.getMemberId() != null ) {
             memberId = member.getMemberId();
         }
         email = member.getEmail();
-        userName = member.getUserName();
         password = member.getPassword();
 
-        MemberResponseDto memberResponseDto = new MemberResponseDto( memberId, email, userName, password );
+        String memeberName = null;
+
+        MemberResponseDto memberResponseDto = new MemberResponseDto( memberId, email, memeberName, password );
 
         return memberResponseDto;
     }

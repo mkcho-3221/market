@@ -47,8 +47,8 @@ public class MemberService {
 
         Member findMember = findMember(member.getMemberId());
 
-        Optional.ofNullable(findMember.getUserName())
-                .ifPresent(userName -> findMember.setUserName(userName));
+        Optional.ofNullable(findMember.getMemberName())
+                .ifPresent(userName -> findMember.setMemberName(userName));
         Optional.ofNullable(findMember.getPassword())
                 .ifPresent(password -> findMember.setPassword(password));
 

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class MemberPostDto{
     @NotBlank
-    private String userName;
+    private String memberName;
     @Email
     @NotBlank
     private String email;

@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class MemberPatchDto{
     private long memberId;
-    private String userName;
+    private String memberName;
     private String password;
 }

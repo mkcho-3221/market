@@ -9,6 +9,6 @@ import lombok.Setter;
 public class MemberResponseDto {
     private long memberId;
     private String email;
-    private String userName;
+    private String memberName;
     private String password;
 }
