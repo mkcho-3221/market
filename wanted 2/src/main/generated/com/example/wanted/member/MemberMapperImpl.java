@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-26T09:20:33+0900",
+    date = "2024-06-28T09:42:27+0900",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -49,17 +49,17 @@ public class MemberMapperImpl implements MemberMapper {
 
         long memberId = 0L;
         String email = null;
+        String memberName = null;
         String password = null;
 
         if ( member.getMemberId() != null ) {
             memberId = member.getMemberId();
         }
         email = member.getEmail();
+        memberName = member.getMemberName();
         password = member.getPassword();
 
-        String memeberName = null;
-
-        MemberResponseDto memberResponseDto = new MemberResponseDto( memberId, email, memeberName, password );
+        MemberResponseDto memberResponseDto = new MemberResponseDto( memberId, email, memberName, password );
 
         return memberResponseDto;
     }

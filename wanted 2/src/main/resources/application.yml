@@ -19,3 +19,6 @@ logging:
       springframework:
         jdbc:
           core: TRACE
+mail:
+  address:
+    admin: admin@admin.com
