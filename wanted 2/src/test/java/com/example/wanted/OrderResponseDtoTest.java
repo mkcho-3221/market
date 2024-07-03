@@ -24,7 +24,7 @@ public class OrderResponseDtoTest {
     @Autowired
     private ProductService productService;
 
-    @DisplayName("OrderResponseDto 확인")
+    @DisplayName("OrderResponseDto 확인1")
     @Test
     public void testOrderToOrderResponseDto(){
         //get
@@ -67,7 +67,7 @@ public class OrderResponseDtoTest {
     }
 
     @Test
-    @DisplayName("OrderResponseDto 확인")
+    @DisplayName("OrderResponseDto 확인2")
     public void testOrderToOrderResponseDto2() {
         // Given
         Member seller = new Member();
