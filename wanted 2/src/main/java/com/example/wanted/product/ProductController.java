@@ -24,6 +24,7 @@ public class ProductController {
         this.productMapper = productMapper;
     }
 
+    //제품 등록
     @PostMapping
     public ResponseEntity postProduct(@Valid @RequestBody ProductPostDto postDto){
 
@@ -34,6 +35,7 @@ public class ProductController {
         return new ResponseEntity(productMapper.productToProductResponseDto(response), HttpStatus.CREATED);
     }
 
+    //제품 세부 내역 업데이트
     @PatchMapping("/{product-id}")
     public ResponseEntity patchProduct(@PathVariable("product-id") long productId,
                                        @Valid @RequestBody ProductPatchDto patchDto){
@@ -45,6 +47,7 @@ public class ProductController {
         return new ResponseEntity(productMapper.productToProductResponseDto(response), HttpStatus.OK);
     }
 
+    //제품 조회
     @GetMapping("/{product-id}")
     public ResponseEntity getProduct(@PathVariable("product-id") long productId){
 
@@ -53,6 +56,7 @@ public class ProductController {
         return new ResponseEntity(productMapper.productToProductResponseDto(response), HttpStatus.OK);
     }
 
+    //전체 제품 조회
     @GetMapping
     public ResponseEntity getProducts(@RequestParam(value = "page", defaultValue = "0") int page,
                                       @RequestParam(value = "size", defaultValue = "10") int size){
@@ -66,6 +70,7 @@ public class ProductController {
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
+    //제품 삭제
     @DeleteMapping("/{product-id}")
     public ResponseEntity deleteProduct(@PathVariable("product-id") @Positive long productId){
 

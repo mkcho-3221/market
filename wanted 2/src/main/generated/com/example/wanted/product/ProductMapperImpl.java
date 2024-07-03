@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-26T09:20:33+0900",
+    date = "2024-06-28T09:42:27+0900",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -57,7 +57,9 @@ public class ProductMapperImpl implements ProductMapper {
         String productStatus = null;
         int price = 0;
 
-        productId = product.getProductId();
+        if ( product.getProductId() != null ) {
+            productId = product.getProductId();
+        }
         productName = product.getProductName();
         if ( product.getProductStatus() != null ) {
             productStatus = product.getProductStatus().name();

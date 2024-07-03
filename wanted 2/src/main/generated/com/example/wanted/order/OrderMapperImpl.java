@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-26T09:20:33+0900",
+    date = "2024-06-28T09:42:27+0900",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -65,9 +65,14 @@ public class OrderMapperImpl implements OrderMapper {
         if ( memberId1 != null ) {
             buyerId = memberId1;
         }
-        productId = productProductProductId( product );
+        Long productId1 = productProductProductId( product );
+        if ( productId1 != null ) {
+            productId = productId1;
+        }
         productStatus = productProductProductStatus( product );
-        orderId = product.getOrderId();
+        if ( product.getOrderId() != null ) {
+            orderId = product.getOrderId();
+        }
         orderStatus = product.getOrderStatus();
 
         OrderResponseDto orderResponseDto = new OrderResponseDto( orderId, orderStatus, productId, sellerId, buyerId, productStatus );
@@ -133,15 +138,18 @@ public class OrderMapperImpl implements OrderMapper {
         return memberId;
     }
 
-    private long productProductProductId(Order order) {
+    private Long productProductProductId(Order order) {
         if ( order == null ) {
-            return 0L;
+            return null;
         }
         Product product = order.getProduct();
         if ( product == null ) {
-            return 0L;
+            return null;
         }
-        long productId = product.getProductId();
+        Long productId = product.getProductId();
+        if ( productId == null ) {
+            return null;
+        }
         return productId;
     }
 
