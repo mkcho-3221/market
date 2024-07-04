@@ -21,13 +21,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class MemberService {
-    private MemberRepository memberRepository;
-    private PasswordEncoder passwordEncoder;
-    private MemberAuthorityUtils authorityUtils;
+    private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final MemberAuthorityUtils authorityUtils;
 
-    public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+    public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder, MemberAuthorityUtils authorityUtils) {
         this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
+        this.authorityUtils = authorityUtils;
     }
 
     public Member findVerifiedMember(long memberId){
