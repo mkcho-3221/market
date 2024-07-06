@@ -35,8 +35,4 @@ public class Member {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
-    public enum MemberRole {
-        ROLE_USER,
-        ROLE_ADMIN;
-    }
 }

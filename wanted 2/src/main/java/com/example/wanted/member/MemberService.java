@@ -1,34 +1,34 @@
 package com.example.wanted.member;
 
 import com.example.wanted.auth.utils.MemberAuthorityUtils;
+import com.example.wanted.event.MemberRegistrationApplicationEvent;
 import com.example.wanted.exception.BusinessLogicException;
 import com.example.wanted.exception.ExceptionCode;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final MemberAuthorityUtils authorityUtils;
+    private final ApplicationEventPublisher publisher;
 
-    public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder, MemberAuthorityUtils authorityUtils) {
+    public MemberService(MemberRepository memberRepository,
+                         PasswordEncoder passwordEncoder,
+                         MemberAuthorityUtils authorityUtils,
+                         ApplicationEventPublisher publisher) {
         this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityUtils = authorityUtils;
+        this.publisher = publisher;
     }
 
     public Member findVerifiedMember(long memberId){
@@ -60,6 +60,8 @@ public class MemberService {
         member.setRoles(roles);
 
         Member savedMember = memberRepository.save(member);
+
+        publisher.publishEvent(new MemberRegistrationApplicationEvent(this, savedMember));
 
         return savedMember;
     }

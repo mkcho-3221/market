@@ -20,7 +20,8 @@ public class AuthenticationUserDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
     private final MemberAuthorityUtils authorityUtils;
 
-    public AuthenticationUserDetailsService(MemberRepository memberRepository, MemberAuthorityUtils authorityUtils) {
+    public AuthenticationUserDetailsService(MemberRepository memberRepository,
+                                            MemberAuthorityUtils authorityUtils) {
         this.memberRepository = memberRepository;
         this.authorityUtils = authorityUtils;
     }
@@ -35,13 +36,12 @@ public class AuthenticationUserDetailsService implements UserDetailsService {
         Collection<? extends GrantedAuthority> authorities =
                 authorityUtils.createAuthorities(findMember.getEmail());
 
-        return new HelloUserDetails(findMember);
+        return new MemberDetails(findMember);
     }
 
-    private final class HelloUserDetails extends Member implements UserDetails{
-        HelloUserDetails(Member member){
+    private final class MemberDetails extends Member implements UserDetails{
+        MemberDetails(Member member){
             setMemberId(member.getMemberId());
-            setMemberName(member.getMemberName());
             setEmail(member.getEmail());
             setPassword(member.getPassword());
             setRoles(member.getRoles());
