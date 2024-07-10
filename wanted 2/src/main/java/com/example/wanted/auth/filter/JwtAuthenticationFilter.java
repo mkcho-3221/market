@@ -5,6 +5,7 @@ import com.example.wanted.member.LoginDto;
 import com.example.wanted.member.Member;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
@@ -13,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -77,7 +79,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,
                                             FilterChain filterChain,
-                                            Authentication authResult){
+                                            Authentication authResult) throws ServletException, IOException {
         Member member = (Member) authResult.getPrincipal();
 
         String accessToken = delegateAccessToken(member);
@@ -85,5 +87,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         response.setHeader("Authorization", "Bearer"+accessToken);
         response.setHeader("Refresh", refreshToken);
+
+        this.getSuccessHandler().onAuthenticationSuccess(request,
+                response,
+                authResult);
     }
 }

@@ -51,6 +51,9 @@ public class ErrorResponse {
         return new ErrorResponse(businessLogicException.getExceptionCode().getStatus(),businessLogicException.getMessage());
     }
 
+    public static ErrorResponse of(HttpStatus status) {
+        return new ErrorResponse(status.value(), status.getReasonPhrase());
+    }
 
     @Getter
     public static class FieldError{
