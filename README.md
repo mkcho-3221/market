@@ -10,7 +10,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4) 거래](#4-거래)  
 [2. 사용한 기술 스택 및 라이브러리 ](#2-사용한-기술-스택-및-라이브러리)  
 [3. ERD 데이터 모델링 ](#3-erd-데이터-모델링)  
-[4. Trouble Shooting ](#4-trouble-shooting)  
 
 ---
 
