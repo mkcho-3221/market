@@ -17,12 +17,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@Transactional
 public class OrderServiceTest {
     @Autowired
     private OrderService orderService;
@@ -39,10 +41,12 @@ public class OrderServiceTest {
     @Autowired
     private MemberRepository memberRepository;
 
-//    @BeforeEach
-//    public void setup() {
-//        MockitoAnnotations.openMocks(this);
-//    }
+    @BeforeEach
+    public void setup() {
+        orderRepository.deleteAll();
+        productRepository.deleteAll();
+        memberRepository.deleteAll();
+    }
 
     @DisplayName("거래 생성 시, 거래 상태값은 1(진행중)이어야 함")
     @Test
@@ -112,7 +116,6 @@ public class OrderServiceTest {
         // given
         //seller 설정
         Member seller = new Member();
-        seller.setMemberId(1L);
         seller.setEmail("123@seller.com");
         seller.setMemberName("Seller");
         seller.setPassword("sell123");
@@ -121,7 +124,6 @@ public class OrderServiceTest {
 
         //buyer 설정
         Member buyer = new Member();
-        buyer.setMemberId(2L);
         buyer.setEmail("123@buyer.com");
         buyer.setMemberName("Buyer");
         buyer.setPassword("buy123");
@@ -130,7 +132,6 @@ public class OrderServiceTest {
 
         //buyer 설정
         Member member3 = new Member();
-        member3.setMemberId(3L);
         member3.setEmail("123@member3.com");
         member3.setMemberName("Member3");
         member3.setPassword("member123");
@@ -139,7 +140,6 @@ public class OrderServiceTest {
 
         //product 설정
         Product product1 = new Product();
-        product1.setProductId(1L);
         product1.setProductName("New Product1");
         product1.setPrice(100);
         product1.setSeller(seller);
@@ -148,7 +148,6 @@ public class OrderServiceTest {
 
         //product2 설정
         Product product2 = new Product();
-        product2.setProductId(2L);
         product2.setProductName("New Product2");
         product2.setPrice(200);
         product2.setSeller(seller);
@@ -157,7 +156,6 @@ public class OrderServiceTest {
 
         //product2 설정
         Product product3 = new Product();
-        product3.setProductId(3L);
         product3.setProductName("New Product3");
         product3.setPrice(300);
         product3.setSeller(seller);
@@ -166,7 +164,6 @@ public class OrderServiceTest {
 
         //order 설정
         Order order1 = new Order();
-        order1.setOrderId(1L);
         order1.addMember(buyer);
         order1.addProduct(product1);
 
@@ -174,7 +171,6 @@ public class OrderServiceTest {
 
         //order 설정
         Order order2 = new Order();
-        order2.setOrderId(2L);
         order2.addMember(member3);
         order2.addProduct(product2);
 
@@ -182,7 +178,6 @@ public class OrderServiceTest {
 
         //order 설정
         Order order3 = new Order();
-        order3.setOrderId(2L);
         order3.addMember(buyer);
         order3.addProduct(product3);
 
@@ -212,7 +207,6 @@ public class OrderServiceTest {
     public void getCreateOrder() {
         // given
         Member seller = new Member();
-        seller.setMemberId(1L);
         seller.setEmail("123@seller.com");
         seller.setMemberName("Seller");
         seller.setPassword("sell123");
@@ -220,7 +214,6 @@ public class OrderServiceTest {
         memberService.createMember(seller);
 
         Member buyer = new Member();
-        buyer.setMemberId(2L);
         buyer.setEmail("123@buyer.com");
         buyer.setMemberName("Buyer");
         buyer.setPassword("buy123");
@@ -229,7 +222,6 @@ public class OrderServiceTest {
 
 
         Product product = new Product();
-        product.setProductId(1L);
         product.setProductName("New Product");
         product.setPrice(100);
         product.setSeller(seller);
@@ -244,9 +236,9 @@ public class OrderServiceTest {
         Order createdOrder = orderService.createOrder(order);
 
         // then
-        assertThat(createdOrder.getProduct().getSeller().getMemberId()).isEqualTo(1L);
-        assertThat(createdOrder.getBuyer().getMemberId()).isEqualTo(2L);
-        assertThat(createdOrder.getProduct().getProductId()).isEqualTo(1L);
+        assertThat(createdOrder.getProduct().getSeller().getMemberId()).isEqualTo(seller.getMemberId());
+        assertThat(createdOrder.getBuyer().getMemberId()).isEqualTo(buyer.getMemberId());
+        assertThat(createdOrder.getProduct().getProductId()).isEqualTo(product.getProductId());
 
     }
 }

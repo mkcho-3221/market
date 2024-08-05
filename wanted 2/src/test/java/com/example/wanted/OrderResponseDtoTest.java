@@ -111,7 +111,6 @@ public class OrderResponseDtoTest {
         OrderResponseDto responseDto = orderMapper.orderToOrderResponseDto(order);
 
         // Then
-        System.out.println("OrderResponseDto: " + responseDto); // 디버깅용 출력
         assertThat(responseDto.getSellerId()).isEqualTo(savedSellerMember.getMemberId());
     }
 }
