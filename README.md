@@ -43,5 +43,3 @@
     
 ## 3. ERD 데이터 모델링  
   <img width="754" alt="image" src="https://github.com/user-attachments/assets/f9334bbe-874c-4651-925c-8d932dc4d0cb">  
-  
-## 4. Trouble Shooting  
