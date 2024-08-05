@@ -31,7 +31,16 @@
 - [ ] 판매자는 거래 진행 중인 구매자에 대해 "판매 승인"을 하는 경우 거래가 완료됨.  
   
 ## 2. 사용한 기술 스택 및 라이브러리  
-  
+<div align=center> 
+  <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> 
+  <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> 
+  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
+  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white"/>
+</div>
+
+  - 라이브러리 : Spring Web, Spring Data JPA, Spring Security, Lombok, JWT
+    
 ## 3. ERD 데이터 모델링  
   <img width="754" alt="image" src="https://github.com/user-attachments/assets/f9334bbe-874c-4651-925c-8d932dc4d0cb">  
   
