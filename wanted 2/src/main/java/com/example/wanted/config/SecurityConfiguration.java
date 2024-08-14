@@ -21,6 +21,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -51,11 +52,12 @@ public class SecurityConfiguration {
                         .authenticationEntryPoint(new MemberAuthenticationEntryPoint())
                         .accessDeniedHandler(new MemberAccessDeniedHandler()))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/*/orders/**").hasAnyRole("USER","ADMIN")
-                        .requestMatchers(HttpMethod.PATCH,"/*/members").hasRole("USER")
-                        .requestMatchers(HttpMethod.DELETE,"/*/members").hasRole("USER")
-                        .requestMatchers(HttpMethod.PATCH,"/*/products/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.DELETE, "/*/products/**").hasRole("USER")
+                                .requestMatchers(HttpMethod.GET, "/products/**").permitAll()
+                                .requestMatchers(HttpMethod.PATCH,"/members/**").hasRole("USER")
+                                .requestMatchers(HttpMethod.DELETE,"/members/**").hasRole("USER")
+                                .requestMatchers(HttpMethod.PATCH,"/products/**").hasRole("USER")
+                                .requestMatchers(HttpMethod.DELETE, "/products/**").hasRole("USER")
+                                .requestMatchers("/*/orders/**").hasRole("USER")
 //                        .requestMatchers("/products/**").hasRole("USER")
                         .requestMatchers("/*").permitAll()
                 )
@@ -94,8 +96,10 @@ public class SecurityConfiguration {
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler());
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());
 
-            builder.addFilter(jwtAuthenticationFilter)
-                    .addFilterAfter(jwtAuthenticationFilter, JwtAuthenticationFilter.class);
+//            builder.addFilter(jwtAuthenticationFilter)
+//                    .addFilterAfter(jwtAuthenticationFilter, JwtAuthenticationFilter.class);
+
+            builder.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         }
 
         public HttpSecurity build(){
