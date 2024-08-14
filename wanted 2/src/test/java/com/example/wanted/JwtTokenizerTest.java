@@ -97,27 +97,22 @@ public class JwtTokenizerTest {
         return accessToken;
     }
 
-    @DisplayName("jws 검증 후 예외 미발생")
+    @DisplayName("jwt 검증 후 예외 미발생")
     @Test
     public void verifySignatureTest() throws InterruptedException {
-        String accessToken = getAccessToken(Calendar.MINUTE, 10);
+        String accessToken = getAccessToken(Calendar.MINUTE, 1);
 
         assertDoesNotThrow(()-> jwtTokenizer.verifySignature(accessToken, base64EncodedSecretKey));
-
-        TimeUnit.MILLISECONDS.sleep(1500);
-
-        assertThrows(ExpiredJwtException.class,
-                () -> jwtTokenizer.verifySignature(accessToken, base64EncodedSecretKey));
     }
 
-    @DisplayName("jws 검증 후 예외(ExpiredJwtException) 발생")
+    @DisplayName("jwt 검증 후 예외(ExpiredJwtException) 발생")
     @Test
     public void verifyExpirationTest() throws InterruptedException {
-        String accessToken = getAccessToken(Calendar.SECOND, 11);
+        String accessToken = getAccessToken(Calendar.SECOND, 1);
 
         assertDoesNotThrow(()-> jwtTokenizer.verifySignature(accessToken, base64EncodedSecretKey));
 
-        TimeUnit.MILLISECONDS.sleep(1500);
+        TimeUnit.MILLISECONDS.sleep(2000);
 
         assertThrows(ExpiredJwtException.class,
                 () -> jwtTokenizer.verifySignature(accessToken, base64EncodedSecretKey));
