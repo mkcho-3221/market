@@ -3,6 +3,7 @@ package com.example.wanted;
 import com.example.wanted.product.Product;
 import com.example.wanted.product.ProductRepository;
 import com.example.wanted.product.ProductService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +18,7 @@ public class ProductServiceTest {
     private ProductRepository productRepository;
 
     @Test
+    @DisplayName("제품 등록 시, 제품 상태번호가 1(판매중)이어야 함")
     public void whenProductIsCreated_thenProductStatusStepNumberShouldBeOne() {
         // given
         Product product = new Product();
