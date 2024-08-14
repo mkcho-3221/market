@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,7 +32,7 @@ public class ProductControllerTest {
         System.out.println("Sending login request for password : " + password);
 
         MvcResult result = mockMvc.perform(post("/auth/login")
-                        .content("{\"username\" : \"testUser@email.com\" , \"password\" : \"testPassword\"}"))
+                        .content("{\"username\" : \"" + username + "\" , \"password\" : \"" + password +"\" }"))
                 .andExpect(status().isOk())
                 .andReturn();
 
